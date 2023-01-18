@@ -4,11 +4,12 @@ const findAllId = async (newSales) => {
   const existId = await Promise.all(
     newSales.map(async (item) => {
       const productId = await productsModel.findId(item.productId);
+      console.log(`message:${productId}`);
       if (!productId) return false;
       return true;
     }),
   );
-
+  console.log(existId);
   return existId;
 };
 
@@ -37,4 +38,5 @@ module.exports = {
   createSales,
   findAll,
   findId,
+  findAllId,
 };
