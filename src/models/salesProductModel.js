@@ -15,6 +15,23 @@ const sales = await Promise.all(
 
   return { id, itemsSold: sales };
 };
+
+const findAll = async () => {
+  const query = `SELECT s.date as date, sp.sale_id as saleId, sp.product_id as productId,
+  sp.quantity as quantity FROM sales AS s INNER JOIN sales_products AS sp 
+  ON s.id = sp.sale_id ORDER BY sale_id,product_id`;
+  const [result] = await connection.execute(query);
+  return result;
+};
+const findId = async (id) => {
+  const query = `SELECT s.date,sp.product_id as productId,sp.quantity 
+  FROM sales AS s INNER JOIN sales_products AS sp
+   ON s.id = sp.sale_id WHERE ID=? ORDER BY product_id`;
+  const [result] = await connection.execute(query, [id]);
+  return result;
+};
 module.exports = {
   createSaleProduct,
+  findAll,
+  findId,
 };
