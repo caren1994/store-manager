@@ -19,10 +19,10 @@ const findId = async (id) => {
 
 const newProduct = async (name) => {
    const error = schema.validateName(name);
+
   if (error.type) return error;
   const product = await productsModel.newProduct(name);
- if (product) return { type: null, message: product };
-return { type: 'PRODUCT_NOT_FOUND', message: 'Product not found' };
+ return { type: null, message: product };
 };
 module.exports = {
   findAll,

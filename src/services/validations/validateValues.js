@@ -15,6 +15,7 @@ const validateName = (name) => {
   }
       return { type: null, message: '' };
 };
+
 module.exports = {
   validateId,
   validateName,

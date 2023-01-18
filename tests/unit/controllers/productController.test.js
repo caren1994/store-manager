@@ -9,6 +9,9 @@ const { productsService } = require('../../../src/services');
 const { productsController } = require('../../../src/controllers');
 const {
   product,
+  req,
+  newProduct,
+  NAME_INVALID,
 } = require('../controllers/mocks/mockControler');
 
 describe('Teste de unidade do Controller', function () {
@@ -101,3 +104,47 @@ describe('Teste de unidade do Controller', function () {
     sinon.restore();
   });
 });
+describe('adicionando um produto', function () {
+  if('deve retornar "201" caso seja criado com sucesso',async function(){
+       // arrange
+      const res = {};
+    const req = { body: req };
+      
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+      sinon
+        .stub(productsService, 'newProduct')
+        .resolves({ type: null, message: newProduct });
+
+      // act
+      await productsController.newProduct(req, res);
+
+      // assert
+      expect(res.status).to.have.been.calledWith(201);
+      expect(res.json).to.have.been.calledWith(newProduct);
+  });
+  if ('deve retornar erro do service em caso de nome invalido ', async function () {
+       // arrange
+      const res = {};
+    const req = { body: NAME_INVALID };
+      
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+      sinon
+        .stub(productsService, 'newProduct')
+        .resolves({ type: 'INVALID_VALUE',
+    message: '"name" length must be at least 5 characters long' });
+
+      // act
+      await productsController.newProduct(req, res);
+
+      // assert
+    expect(res.status).to.have.been.calledWith(422);
+    expect(res.json).to.have.been.calledWith({ message: '"name" length must be at least 5 characters long'});
+  });
+  
+     afterEach(function () {
+    sinon.restore();
+     });
+  
+})

@@ -1,8 +1,9 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
 const { productsService } = require('../../../src/services');
-const { product } = require('./mocks/mockService');
+const { product,newProduct } = require('./mocks/mockService');
 const { productsModel } = require('../../../src/models');
+
 
 describe('Testes de unidade do Service todos os produtos', function () {
 
@@ -67,3 +68,25 @@ describe('busca por um produto', function () {
     sinon.restore();
   });
 });
+describe('adicionando um produto', function () {
+     it('se a operação for efetuada com sucesso retorne o produto adicionado ', async function () {
+    // Arrange
+    sinon.stub(productsModel, 'newProduct').resolves(newProduct);
+    // Act
+    const result = await productsService.newProduct('produtox');
+    // Assert
+    expect(result.type).to.be.equal(null);
+     expect(result.message).to.deep.equal(newProduct);
+     });
+       it('cadastrando nome com 3 caracteres para testar validação ', async function () {
+
+    // Act
+    const result = await productsService.newProduct('oi');
+    // Assert
+    expect(result.type).to.be.deep.equal('INVALID_VALUE');
+     expect(result.message).to.deep.equal('"name" length must be at least 5 characters long');
+     });
+     afterEach(function () {
+    sinon.restore();
+  });
+})

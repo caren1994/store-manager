@@ -15,7 +15,20 @@ const product = [
     "name": "Escudo do Capitão América"
   }
 ];
+const newProduct={
+  "id": 1,
+  "name": "produtox"
+}
+const productSale = {
+  id: 1, itemsSold: [
+    { productId: 1, quantity: 3 }
+  ]
+};
+const Sale = [{ productId: 1, quantity: 3 }];
 
 module.exports = {
   product,
+  newProduct,
+  productSale,
+  Sale,
 }
