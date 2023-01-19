@@ -22,11 +22,7 @@ describe('Testes de unidade do model de products', function () {
     // Assert
     expect(result).to.be.deep.equal(products[0]);
   });
-  afterEach(function () {
-    sinon.restore();
-  });
-});
-describe('adicionando um produto', function () {
+
      it('se a operação for efetuada com sucesso retorne o produto adicionado ', async function () {
       // Arrange
        sinon.stub(connection, 'execute').resolves([{ insertId:1 }]);
@@ -37,7 +33,27 @@ describe('adicionando um produto', function () {
      });
      afterEach(function () {
     sinon.restore();
+     });
+  
+    it('update product id', async function () {
+    sinon.stub(connection, 'execute').resolves( )
+
+    const result = await productsModel.updateProduct(1, "cabeleira")
+
+    expect(result).to.be.deep.equal( { id: 1, name: "cabeleira"});
+    });
+  
+  it('delete product id', async function () {
+    sinon.stub(connection, 'execute').resolves([{afectedRows:1}])
+
+    const result = await productsModel.deleteProduct(1)
+
+    expect(result).to.be.deep.equal({ afectedRows: 1 });
   });
-})
+  
+    afterEach(function () {
+    sinon.restore();
+  });
+});
 
 

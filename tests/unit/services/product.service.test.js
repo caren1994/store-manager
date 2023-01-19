@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
 const { productsService } = require('../../../src/services');
-const { product,newProduct } = require('./mocks/mockService');
+const { product,newProduct,productNew } = require('./mocks/mockService');
 const { productsModel } = require('../../../src/models');
 
 
@@ -85,7 +85,30 @@ describe('adicionando um produto', function () {
     // Assert
     expect(result.type).to.be.deep.equal('INVALID_VALUE');
      expect(result.message).to.deep.equal('"name" length must be at least 5 characters long');
-     });
+       });
+  it('update id product', async () => {
+    //arrange
+    sinon.stub(productsModel, 'findId').resolves({ type: null });
+    sinon.stub(productsModel, 'updateProduct').resolves(productNew);
+    //act
+     const result=await productsService.updateProduct(1,'Martelo do Batman')
+
+    //assert
+    expect(result.message).to.deep.equal(productNew);
+
+  })
+    it('delete id product', async () => {
+    //arrange
+    sinon.stub(productsModel, 'findId').resolves({ type: null });
+    sinon.stub(productsModel, 'deleteProduct').resolves({affectedRows:1});
+    //act
+     const result=await productsService.deleteProduct(1)
+
+    //assert
+    expect(result.message).to.deep.equal({affectedRows:1});
+
+    })
+
      afterEach(function () {
     sinon.restore();
   });

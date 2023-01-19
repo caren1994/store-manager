@@ -19,9 +19,24 @@ const findId = async (req, res) => {
     if (type) return res.status(errorMap.mapError(type)).json({ message });
   res.status(200).json(message);
 };
+const deleteSales = async (req, res) => {
+  const { id } = req.params;
+  const { type, message } = await salesService.deleteSales(id);
+    if (type) return res.status(errorMap.mapError(type)).json({ message });
+  res.status(204).json();
+};
+const updateSales = async (req, res) => {
+  const updatesale = req.body;
+  const { id } = req.params;
+   const { type, message } = await salesService.updateSales(id, updatesale);
+    if (type) return res.status(errorMap.mapError(type)).json({ message });
+  res.status(200).json(message);
+};
 
 module.exports = {
   createSales,
   findAll,
   findId,
+  deleteSales,
+  updateSales,
 };

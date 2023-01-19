@@ -36,9 +36,16 @@ expect(result.message).to.deep.equal(productSale);
 //assert
     expect(result.message).to.deep.equal([saleId]);
   });
+  // it('delete sale id', async function () {
+  //   //arrange
+  //   sinon.stub(salesProductModel, 'findId').resolves();
+  //   sinon.stub(salesProductModel, 'deleteSales').resolves({ affectedRows: 1 });
+  //   //act
+  //   const result = await salesService.deleteSales(1)
 
-
-  
+  //   //assert
+  //   expect(result.message).to.deep.equal({ affectedRows: 1 });
+  // });
 afterEach(function () {
 sinon.restore();
 });

@@ -34,9 +34,29 @@ const findId = async (id) => {
   if (result.length === 0) return { type: 'PRODUCT_NOT_FOUND', message: 'Sale not found' };
   return { type: null, message: result };
 };
+
+const deleteSales = async (id) => {
+  const { type } = await findId(id);
+  if (type) return { type: 'PRODUCT_NOT_FOUND', message: 'Sale not found' };
+  const result = await salesProductModel.deleteSales(id);
+  return result;
+};
+const updateSales = async (id, updatesale) => {
+  const exist = await salesProductModel.findId(id);
+    if (exist.length === 0) return { type: 'PRODUCT_NOT_FOUND', message: 'Sale not found' };
+  const productId = await findAllId(updatesale);
+  const ids = productId.every((e) => e === true);
+   if (!ids) return { type: 'PRODUCT_NOT_FOUND', message: 'Product not found' };
+ 
+    const result = await salesProductModel.updateSales(id, updatesale);
+    return { type: null, message: result };
+};
+
 module.exports = {
   createSales,
   findAll,
   findId,
   findAllId,
+  deleteSales,
+  updateSales,
 };

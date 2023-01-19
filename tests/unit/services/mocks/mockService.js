@@ -90,7 +90,11 @@ const saleId = [
     "productId": 3,
     "quantity": 15
   }
-]];
+  ]];
+const productNew={
+  "id": "1",
+  "name": "Martelo do Batman"
+}
 module.exports = {
   product,
   newProduct,
@@ -99,4 +103,5 @@ module.exports = {
   findId,
   allSales,
   saleId,
+  productNew,
 }

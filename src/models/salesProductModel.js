@@ -28,10 +28,32 @@ const findId = async (id) => {
   FROM sales AS s INNER JOIN sales_products AS sp
    ON s.id = sp.sale_id WHERE ID=? ORDER BY product_id`;
   const [result] = await connection.execute(query, [id]);
+  console.log(result);
   return result;
 };
+const deleteSales = async (id) => {
+  const query = 'DELETE FROM StoreManager.sales_products WHERE sale_id = ?';
+  const [result] = await connection.execute(query, [id]);
+  return result;
+};
+const updateSales = async (id, updatesale) => {
+   const sale = await Promise.all(
+    updatesale.map(async (item) => {
+      await connection.execute(
+        'UPDATE StoreManager.sales_products SET quantity = ? WHERE sale_id = ? and product_id = ?',
+        [item.quantity, id, item.productId],
+      );
+      return item;
+    }),
+  );
+
+  return { saleId: Number(id), itemsUpdated: sale };
+};
+
 module.exports = {
   createSaleProduct,
   findAll,
   findId,
+  deleteSales,
+  updateSales,
 };

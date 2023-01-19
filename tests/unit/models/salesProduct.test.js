@@ -39,4 +39,11 @@ describe('testando salesmodel', function () {
 
     expect(result).to.be.deep.equal(saleId);
   });
+      it('delete sale id', async function () {
+    sinon.stub(connection, 'execute').resolves([{afectedRows:1}])
+
+        const result = await salesProductModel.deleteSales(1);
+
+    expect(result).to.be.deep.equal({ afectedRows: 1 });
+    });
 });
