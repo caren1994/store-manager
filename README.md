@@ -1,13 +1,40 @@
-# :construction: README customizado em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto no qual você pode customizar e reutilizar todas as vezes que for executar o trybe-publisher.
+# Projeto StoreManager API
 
-Para deixá-lo com a sua cara, basta alterar o seguinte arquivo da sua máquina: ~/.student-repo-publisher/custom/_NEW_README.md
+Projeto realizado durante módulo de Back-end do curso de desenvolvimento web da Trybe.
 
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+  <summary><strong>O que foi feito</strong></summary></br>
+
+  Neste projeto desenvolvi uma API utilizando a arquitetura MSC (model-service-controller).
+
+  A API construída é um sistema de gerenciamento de vendas no formato dropshipping em que será possível criar, visualizar, deletar e atualizar produtos e vendas.
+  
+  
+  <summary><strong>:memo: Tecnologias utilizadas</strong></summary><br />
+
+  - `Docker`;
+  - `docker-compose`;
+  - `Mysql`;
+  - `Mocha`;
+  - `Nyc`;
+  - `Express`;
+
+
+  <summary><strong>Como rodar o projeto</strong></summary></br>
+
+  **Com Docker:**
+
+  **:warning: Antes de começar, seu docker-compose precisa estar na versão 1.29 ou superior. 
+
+- `docker-compose up -d`
+- `docker exec -it store_manager bash`
+- `npm install`
+- `npm run migration && npm run seed`
+- `npm run debug`
+
+**Localmente:**
+
+**Necessita ter um banco de dados(MySql) instalado localmente**
+
+- `npm install`
+- `npm run migration && npm run seed`
+- `npm run debug`
